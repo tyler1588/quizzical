@@ -6,15 +6,17 @@ import GamePage from "./components/GamePage";
 function App() {
 
   function changePage(){
-    setCurrentPage(<GamePage />)
+    setCurrentPage('gamePage')
   }
-
-  const [currentPage, setCurrentPage] = React.useState(<LandingPage changePage={changePage}/>)
   
+  const [currentPage, setCurrentPage] = React.useState('landingPage')
+
+  const displayPage = currentPage === 'landingPage' ? <LandingPage changePage={changePage}/> : <GamePage />
+
   return (
     <main>
       <img src="blob-a.png" alt="blob-a" className="blob-a"></img>
-      {currentPage}
+      {displayPage}
       <img src="blob-b.png" alt="blob-b" className="blob-b"></img>
     </main>
    
