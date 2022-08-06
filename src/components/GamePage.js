@@ -14,11 +14,23 @@ export default function GamePage(){
         .then(data => setQuestions(data.results));
     },[])
 
-    const renderQuestions = questions.map((question, index) => <Question key={uuid()} title={question.question} incorrect={question.incorrect_answers} correct={question.correct_answer}/>)
+
+    const renderQuestions = questions.map(question => {
+        const id = uuid()
+        return(
+            <Question 
+            key={id}
+            id={id}
+            title={question.question} 
+            incorrect={question.incorrect_answers} 
+            correct={question.correct_answer}/>)
+    })
     
     return (
         <div className="questions">
             {renderQuestions}
+            {questions.length > 0 && <button className="check-btn">Check Answers</button>}
         </div>
+        
     )
 }
