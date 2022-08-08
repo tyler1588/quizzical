@@ -1,36 +1,54 @@
-import React from "react"
-import Question from "./Question";
-import uuid from 'react-uuid';
+import React from 'react';
+import Question from './Question';
 
-export default function GamePage(){
+export default function GamePage(props) {
+  const questions = props.questions;
+  const selectAnswer = props.selectAnswer;
+  const currentPage = props.currentPage;
 
-    //Set state variable to hold array
-    const [questions, setQuestions] = React.useState([])
-
-    //Get array of questions
-    React.useEffect(() => {
-        fetch("https://opentdb.com/api.php?amount=5")
-        .then(res => res.json())
-        .then(data => setQuestions(data.results));
-    },[])
-
-
-    const renderQuestions = questions.map(question => {
-        const id = uuid()
-        return(
-            <Question 
-            key={id}
-            id={id}
-            title={question.question} 
-            incorrect={question.incorrect_answers} 
-            correct={question.correct_answer}/>)
-    })
-    
+  const renderQuestions = questions.map((question) => {
     return (
-        <div className="questions">
-            {renderQuestions}
-            {questions.length > 0 && <button className="check-btn">Check Answers</button>}
+      <Question
+        key={question.id}
+        id={question.id}
+        title={question.question}
+        answers={question.answers}
+        selectAnswer={selectAnswer}
+        currentPage={currentPage}
+      />
+    );
+  });
+
+  let gameButton;
+  if (questions.length > 0) {
+    if (currentPage === 'gamePage') {
+      gameButton = (
+        <button className="check-btn" onClick={props.gradeQuiz}>
+          Check Answers
+        </button>
+      );
+    } else {
+      gameButton = (
+        <button className="check-btn" onClick={props.playGameAgain}>
+          Play Again
+        </button>
+      );
+    }
+  }
+
+  return (
+    <div className="gamePage">
+      <div className="questions">
+        {renderQuestions}
+        <div className="controls">
+          {props.currentPage === 'checkPage' && (
+            <h1 className="score">
+              {`You scored ${props.correctAnswers.num_correct} / ${props.correctAnswers.total_questions} correct answers.`}
+            </h1>
+          )}
+          {gameButton}
         </div>
-        
-    )
+      </div>
+    </div>
+  );
 }

@@ -1,57 +1,52 @@
-import React from "react"
-import uuid from 'react-uuid';
+import React from 'react';
 
-export default function Question(props){
+export default function Question(props) {
+  function htmlDecode(input) {
+    const parser = new DOMParser().parseFromString(input, 'text/html');
 
-    const questionArray = props.incorrect
-    questionArray.push(props.correct)
+    return parser.documentElement.textContent;
+  }
+  const title = htmlDecode(props.title);
 
-    const objectArray = questionArray.map(question => {
-        return (
-            {
-                title: question,
-                selected: false,
-                id: uuid()
+  const questionID = props.id;
+
+  return (
+    <div className="question">
+      <h1 className="question-title">{title}</h1>
+      <div className="answers">
+        {props.answers.map((element) => {
+          const parsedElement = htmlDecode(element.answer);
+
+          let format;
+          if (props.currentPage === 'gamePage') {
+            if (element.selected) {
+              format = 'selected-btn';
+            } else {
+              format = 'question-btn';
             }
-        )    
-    })
+          } else {
+            if (element.correct) {
+              format = 'correct-btn';
+            } else if (element.selected && !element.correct) {
+              format = 'incorrect-btn';
+            } else {
+              format = 'question-btn';
+            }
+          }
 
-    const [outputArray, setOutputArray] = React.useState(objectArray)
-
-    function selectAnswer(event, id){
-        setOutputArray(prev => prev.map(question => {
-            return (
-                question.id === id ? {...question, selected: !question.selected} : question
-            )
-        })
-        )
-    }
-
-
-    function htmlDecode(input){
-        const parser = new DOMParser().parseFromString(input, "text/html")
-
-        return parser.documentElement.textContent;
-    }
-    const title = htmlDecode(props.title)
-
-    return (
-        <div className="question">
-            <h1 className="question-title">{title}</h1>
-            <div className="answers">
-                {outputArray.map(element => {
-                    const parsedElement = htmlDecode(element.title)
-                    return (
-                        <button 
-                        key={element.id} 
-                        className="question-btn"
-                        onClick={(event) => selectAnswer(event, element.id)}
-                        style={{
-                            backgroundColor: element.selected ? "#D6DBF5" : "transparent"
-                        }}>{parsedElement}</button>
-                    )
-            })}
-            </div>
-        </div>
-    )
+          return (
+            <button
+              key={element.id}
+              className={format}
+              onClick={(event) =>
+                props.selectAnswer(event, questionID, element.id)
+              }
+            >
+              {parsedElement}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
