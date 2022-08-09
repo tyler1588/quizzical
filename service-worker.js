@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/quizzical/precache-manifest.d89ba3869672b0c0890382b8ef72ba03.js"
+  "/quizzical/precache-manifest.dda64555d97bbac4718626db378c4ef4.js"
 );
 
 workbox.clientsClaim();
