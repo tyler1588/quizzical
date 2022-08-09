@@ -93,7 +93,7 @@ main {
   margin-bottom: 1rem;
 }
 
-.selected-btn, .question-btn, .correct-btn {
+.selected-btn, .question-btn, .correct-btn, .incorrect-btn {
   border-radius: 5px;
   height: fit-content;
   width: fit-content;
@@ -119,11 +119,6 @@ main {
 .incorrect-btn {
   background-color: #F8BCBC;
   border: none;
-  border-radius: 5px;
-  height: 20px;
-  width: fit-content;
-  font-family: "Inter", sans-serif;
-  font-size: 0.625rem;
 }
 
 .answers {
