@@ -1,0 +1,13 @@
+{
+  "main.css": "/quizzical/static/css/main.bf836ec8.chunk.css",
+  "main.js": "/quizzical/static/js/main.36dacfc4.chunk.js",
+  "main.js.map": "/quizzical/static/js/main.36dacfc4.chunk.js.map",
+  "static/js/1.eb80e1d3.chunk.js": "/quizzical/static/js/1.eb80e1d3.chunk.js",
+  "static/js/1.eb80e1d3.chunk.js.map": "/quizzical/static/js/1.eb80e1d3.chunk.js.map",
+  "runtime~main.js": "/quizzical/static/js/runtime~main.10828be3.js",
+  "runtime~main.js.map": "/quizzical/static/js/runtime~main.10828be3.js.map",
+  "static/css/main.bf836ec8.chunk.css.map": "/quizzical/static/css/main.bf836ec8.chunk.css.map",
+  "index.html": "/quizzical/index.html",
+  "precache-manifest.8e831b8a83d61c80f1c078d44ee8c42d.js": "/quizzical/precache-manifest.8e831b8a83d61c80f1c078d44ee8c42d.js",
+  "service-worker.js": "/quizzical/service-worker.js"
+}
