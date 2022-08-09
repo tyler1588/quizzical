@@ -38,8 +38,10 @@ export default function Question(props) {
             <button
               key={element.id}
               className={format}
-              onClick={(event) =>
-                props.selectAnswer(event, questionID, element.id)
+              onClick={
+                props.currentPage === 'gamePage'
+                  ? (event) => props.selectAnswer(event, questionID, element.id)
+                  : ''
               }
             >
               {parsedElement}
